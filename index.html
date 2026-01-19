@@ -1,122 +1,78 @@
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Piano Kit Selector</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Piano Kit Selector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#111;--mut:#5c6066;--bd:#e6e7ea;--ac:#cedc00;--r:14px}
+*{box-sizing:border-box}
+body{margin:0;padding:24px;font-family:"Inter Tight",system-ui;background:var(--bg);color:var(--fg);font-size:18px}
+.card{max-width:none;width:100%;margin:0;background:#fff;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+header{padding:18px 18px 10px}
+h1{margin:0;font-size:29px;line-height:1.2}
+.top{display:flex;align-items:center;padding:0 18px 14px}
+.bar{flex:1;height:8px;background:#efeff1;border:1px solid var(--bd);border-radius:999px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--ac);transition:width 160ms ease}
+main{padding:16px 18px 18px;border-top:1px solid var(--bd)}
+.q{margin:0 0 12px;font-weight:800;font-size:21px}
+.answers{display:grid;gap:10px}
+button{width:100%;border:1px solid var(--bd);background:#fbfbfc;padding:16px;border-radius:12px;cursor:pointer;text-align:left;font:600 18px/1.25 "Inter Tight",system-ui}
+.resultTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.resultTitle{margin:0;font-size:26px;font-weight:800}
+.restartTop{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;border:1px solid var(--bd);background:#fff;color:var(--mut);font:800 20px/1 "Inter Tight";text-decoration:none;cursor:pointer}
+.grid{display:grid;grid-template-columns:368px 1fr;gap:22px;margin-top:12px;align-items:start}
+.img{border:1px solid var(--bd);border-radius:14px;overflow:hidden;background:#fbfbfc;box-shadow:0 16px 44px rgba(0,0,0,.10)}
+.img img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center}
+.primaryCta{display:inline-flex;align-items:center;justify-content:center;padding:20px 34px;border-radius:999px;border:1px solid var(--ac);background:var(--ac);color:#303030;font:800 19px/1 "Inter Tight";text-decoration:none;margin-top:6px;width:fit-content;align-self:center}
+.meta{margin-top:16px;padding-top:12px;border-top:1px solid var(--bd);color:var(--mut);font-size:20px;line-height:1.45;max-width:70ch}
+.rightCol{display:flex;flex-direction:column;min-height:100%}
+.otherWrap{margin-top:auto;display:flex;flex-direction:column;align-items:flex-end;gap:10px;padding-top:18px}
+.otherLabel{font-size:16px;font-weight:800;color:var(--mut)}
+.otherBtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.miniBtn{display:inline-flex;align-items:center;justify-content:center;padding:12px 15px;border-radius:999px;border:1px solid var(--bd);background:transparent;color:var(--mut);font:800 15px/1 "Inter Tight";text-decoration:none;white-space:nowrap}
+@media (max-width:980px){.grid{grid-template-columns:1fr}.img{max-width:520px;margin:0 auto}.otherWrap{align-items:flex-start}.otherBtns{justify-content:flex-start}}
+</style></head>
+<body><div class="card"><header><h1>Which cardioid piano miking kit should I choose?</h1></header><div class="top"><div class="bar"><div class="fill" id="fill"></div></div></div><main id="app"></main></div>
+<script>
+const Q=[{k:"piano",t:"What type of piano are you miking?",a:["Grand piano","Upright piano"]},{k:"env",t:"What type of environment are you working in?",a:["Loud environment with bleed","Solo piano/quiet stage","Recording studio"]},{k:"sys",t:"What type of system will you be using?",a:["Wired","Wireless"]},{k:"mount",t:"Where do you prefer to mount the mics?",a:["Inside the piano","Outside the piano"]},{k:"prio",t:"What is most important to you?",a:["Fast and easy set up out of the box","A flexible solution that can fit any stereo set up"]}]
+const K={DPK4099:{title:"Recommended kit: DPK4099",note:"Our recommendation is the DPK4099 Piano Stereo Kit, which includes a selected stereo pair of 4099 CORE+ Loud SPL supercardioid instrument mics and versatile magnet mounts, designed for use on the piano.<br><br> The kit is compact and designed for quick placement in challenging environments, yet delivers clear, articulate piano tones.<br><br> This is our primary piano solution when using a wireless system and it pairs perfectly with the N-Series Wireless Microphone system or other leading wireless systems on the market.<br><br> The 4099 CORE+ Instrument Mics are often described as bright, focused and slightly lean in the low end, which can be an advantage on loud stages or closed-lid situations where isolation is essential.",url:"https://www.dpamicrophones.com/microphones/kits/dpk4099?variant=248",img:"https://dpa.cloud14.structpim.com/media/dkobm3za/dpk4099-close-up.jpg"},DPK2015:{title:"Recommended kit: DPK2015",note:"Our recommendation is the DPK2015 Piano Stereo Kit, which has a selected stereo pair of 2015 Wide Cardioid Mics, gooseneck mounts, a stereo boom and more accessories.  <br><br>The 2015 Wide Cardioid Mics are often described as providing a slightly “sweet” piano sound with excellent blend, a natural stereo image and a full sound in several placements. Due to their wide pick-up pattern, DPK2015 is valued for its fast and easy, yet flexible mounting solution.  <br><br>This solution takes a minute to install and ensures that the true voice of the piano shines. The DPK2015 is designed for versatile mounting: inside or outside the piano, lid open or closed.  ",url:"https://www.dpamicrophones.com/microphones/kits/dpk2015?variant=247",img:"https://dpa.cloud14.structpim.com/media/kawl4n0g/dpk2015-close-up.jpg"},DPK4011:{title:"Recommended kit: DPK4011",note:"Our recommendation is the DPK4011 Stereo Piano Kit, which has a matched stereo pair of our award-winning 4011 Cardioid Mics. Bundled together with our ES active cable preamp, this kit allows discreet placement in tight spaces. It also provides exceptional placement versatility with numerous fitting accessories, including hanging, fixed X/Y or ORTF. In addition, with the enclosed stereo boom, A/B positioning is also possible. <br><br>The 4011 Cardioid Mics are widely heard as providing a natural, warm and detailed piano sound that offers a classic “listener perspective” and a balanced top–bottom response. It is a preferred choice for high-fidelity recordings in studio or live, solo or in ensemble settings.",url:"https://www.dpamicrophones.com/microphones/kits/dpk4011?variant=211",img:"https://dpa.cloud14.structpim.com/media/lxkb3r1y/dpk4011-close-up.jpg"}}
+const KEYS=Object.keys(K),app=document.getElementById("app"),fill=document.getElementById("fill")
+let i=0,ans={}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))
+const prog=()=>fill.style.width=`${(i/Q.length)*100}%`
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&display=swap" rel="stylesheet">
+const heightNow=()=>Math.round(document.documentElement.getBoundingClientRect().height)
+let raf=0
+const sendHeightSoon=()=>{
+  if(raf)return
+  raf=requestAnimationFrame(()=>{
+    raf=0
+    parent.postMessage({type:"resize",height:heightNow()},"*")
+  })
+}
 
-  <style>
-    :root{--bg:#fff;--fg:#111;--mut:#5c6066;--bd:#e6e7ea;--ac:#cedc00;--r:14px}
-    *{box-sizing:border-box}
-    html{margin:0;padding:0;overflow:hidden}
-    body{margin:0;padding:24px;font-family:"Inter Tight",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--fg);font-size:18px;overflow:hidden}
+const decide=()=>res(ans.prio===Q[4].a[0]?"DPK2015":"DPK4011")
+const pick=(k,v)=>{ans[k]=v;if(k==="sys"&&v==="Wireless")return res("DPK4099");i++;i>=Q.length?decide():q()}
 
-    .card{max-width:none;width:100%;margin:0;background:#fff;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
-    header{padding:18px 18px 10px}
-    h1{margin:0;font-size:22px;line-height:1.2}
-    .sub{margin:8px 0 0;color:var(--mut);font-size:14px;line-height:1.4}
+const q=()=>{
+  prog()
+  const x=Q[i]
+  app.innerHTML=`<div class="q">${esc(x.t)}</div><div class="answers">${x.a.map((t,idx)=>`<button type="button" data-i="${idx}">${esc(t)}</button>`).join("")}</div>`
+  app.querySelectorAll("button").forEach(b=>b.onclick=()=>pick(x.k,x.a[+b.dataset.i]))
+  sendHeightSoon()
+}
 
-    .bar{height:10px;background:#f2f3f6;border-top:1px solid var(--bd)}
-    .fill{height:10px;width:0;background:var(--ac);transition:width .2s ease}
+const res=key=>{
+  prog()
+  fill.style.width="100%"
+  const r=K[key],others=KEYS.filter(k=>k!==key).map(k=>`<a class="miniBtn" href="${K[k].url}" target="_top">${esc(k)}</a>`).join("")
+  app.innerHTML=`<div class="resultTop"><div><div class="resultTitle">${esc(r.title)}</div></div><a class="restartTop" href="#" id="rt">↺</a></div><div class="grid"><div class="img"><img src="${r.img}" alt=""></div><div class="rightCol"><a class="primaryCta" href="${r.url}" target="_top">View product</a><div class="meta">${(r.note)}</div><div class="otherWrap"><div class="otherLabel">Other options</div><div class="otherBtns">${others}</div></div></div></div>`
+  document.getElementById("rt").onclick=e=>{e.preventDefault();i=0;ans={};q();sendHeightSoon()}
+  app.querySelectorAll("img").forEach(img=>img.addEventListener("load",sendHeightSoon,{once:true}))
+  sendHeightSoon()
+}
 
-    .body{padding:18px}
-    .q{font-size:20px;font-weight:800;margin:0 0 14px}
-    .answers{display:grid;gap:10px}
-    button{font:inherit;border:1px solid var(--bd);background:#fff;border-radius:12px;padding:12px 14px;text-align:left;cursor:pointer}
-    button:hover{border-color:#c9ccd3}
+new ResizeObserver(sendHeightSoon).observe(document.documentElement)
+window.addEventListener("load",sendHeightSoon)
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sendHeightSoon)
 
-    .resultTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
-    .resultTitle{font-size:22px;font-weight:800;line-height:1.2}
-    .restartTop{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid var(--bd);text-decoration:none;color:var(--fg)}
-
-    .grid{display:grid;gap:14px}
-    @media(min-width:860px){.grid{grid-template-columns:1fr 1.1fr;align-items:start}}
-
-    .img{border:1px solid var(--bd);border-radius:14px;overflow:hidden;background:#fafafa}
-    .img img{width:100%;height:auto;display:block}
-
-    .rightCol{display:grid;gap:12px}
-    .primaryCta{display:inline-flex;align-items:center;justify-content:center;border-radius:14px;background:var(--ac);color:#111;text-decoration:none;padding:12px 14px;font-weight:800}
-
-    .meta{color:var(--fg);font-size:16px;line-height:1.5}
-    .meta br{content:"";display:block;margin:10px 0}
-
-    .otherWrap{border-top:1px solid var(--bd);padding-top:12px}
-    .otherLabel{color:var(--mut);font-size:14px;margin-bottom:10px}
-    .otherBtns{display:flex;flex-wrap:wrap;gap:10px}
-    .miniBtn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--bd);border-radius:999px;padding:10px 12px;text-decoration:none;color:var(--fg);font-weight:600}
-  </style>
-</head>
-<body>
-  <div class="card">
-    <header>
-      <h1>Piano Kit Selector</h1>
-      <div class="sub">Answer a few questions and get a recommended DPA piano kit.</div>
-    </header>
-    <div class="bar"><div id="fill" class="fill"></div></div>
-    <div class="body">
-      <div id="app"></div>
-    </div>
-  </div>
-
-  <script>
-  const Q=[{k:"piano",t:"What type of piano are you miking?",a:["Grand piano","Upright piano"]},{k:"env",t:"What type of environment are you working in?",a:["Loud environment with bleed","Solo piano/quiet stage","Recording studio"]},{k:"sys",t:"What type of system will you be using?",a:["Wired","Wireless"]},{k:"mount",t:"Where do you prefer to mount the mics?",a:["Inside the piano","Outside the piano"]},{k:"prio",t:"What is most important to you?",a:["Fast and easy set up out of the box","A flexible solution that can fit any stereo set up"]}]
-  const K={DPK4099:{title:"Recommended kit: DPK4099",note:"Our recommendation is the DPK4099 Piano Stereo Kit, which includes a selected stereo pair of 4099 CORE+ Loud SPL supercardioid instrument mics and versatile magnet mounts, designed for use on the piano.<br><br> The kit is compact and designed for quick placement in challenging environments, yet delivers clear, articulate piano tones.<br><br> This is our primary piano solution when using a wireless system and it pairs perfectly with the N-Series Wireless Microphone system or other leading wireless systems on the market.<br><br> The 4099 CORE+ Instrument Mics are often described as bright, focused and slightly lean in the low end, which can be an advantage on loud stages or closed-lid situations where isolation is essential.",url:"https://www.dpamicrophones.com/microphones/kits/dpk4099?variant=248",img:"https://dpa.cloud14.structpim.com/media/dkobm3za/dpk4099-close-up.jpg"},DPK2015:{title:"Recommended kit: DPK2015",note:"Our recommendation is the DPK2015 Piano Stereo Kit, which has a selected stereo pair of 2015 Wide Cardioid Mics, gooseneck mounts, a stereo boom and more accessories.  <br><br>The 2015 Wide Cardioid Mics are often described as providing a slightly “sweet” piano sound with excellent blend, a natural stereo image and a full sound in several placements. Due to their wide pick-up pattern, DPK2015 is valued for its fast and easy, yet flexible mounting solution.  <br><br>This solution takes a minute to install and ensures that the true voice of the piano shines. The DPK2015 is designed for versatile mounting: inside or outside the piano, lid open or closed.  ",url:"https://www.dpamicrophones.com/microphones/kits/dpk2015?variant=247",img:"https://dpa.cloud14.structpim.com/media/kawl4n0g/dpk2015-close-up.jpg"},DPK4011:{title:"Recommended kit: DPK4011",note:"Our recommendation is the DPK4011 Stereo Piano Kit, which has a matched stereo pair of our award-winning 4011 Cardioid Mics. Bundled together with our ES active cable preamp, this kit allows discreet placement in tight spaces. It also provides exceptional placement versatility with numerous fitting accessories, including hanging, fixed X/Y or ORTF. In addition, with the enclosed stereo boom, A/B positioning is also possible. <br><br>The 4011 Cardioid Mics are widely heard as providing a natural, warm and detailed piano sound that offers a classic “listener perspective” and a balanced top-bottom response. It is a preferred choice for high-fidelity recordings in studio or live, solo or in ensemble settings.",url:"https://www.dpamicrophones.com/microphones/kits/dpk4011?variant=211",img:"https://dpa.cloud14.structpim.com/media/lxkb3r1y/dpk4011-close-up.jpg"}}
-  const KEYS=Object.keys(K),app=document.getElementById("app"),fill=document.getElementById("fill")
-  let i=0,ans={}
-
-  const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))
-  const prog=()=>fill.style.width=`${(i/Q.length)*100}%`
-
-  const heightNow=()=>Math.round(document.documentElement.clientHeight||window.innerHeight||0)
-
-  let raf=0,lastH=0
-  const sendHeightSoon=()=>{
-    if(raf)return
-    raf=requestAnimationFrame(()=>{
-      raf=0
-      const h=heightNow()
-      if(!h)return
-      if(Math.abs(h-lastH)<2)return
-      lastH=h
-      parent.postMessage({type:"resize",height:h},"*")
-    })
-  }
-
-  const decide=()=>res(ans.prio===Q[4].a[0]?"DPK2015":"DPK4011")
-  const pick=(k,v)=>{ans[k]=v;if(k==="sys"&&v==="Wireless")return res("DPK4099");i++;i>=Q.length?decide():q()}
-
-  const q=()=>{
-    prog()
-    const x=Q[i]
-    app.innerHTML=`<div class="q">${esc(x.t)}</div><div class="answers">${x.a.map((t,idx)=>`<button type="button" data-i="${idx}">${esc(t)}</button>`).join("")}</div>`
-    app.querySelectorAll("button").forEach(b=>b.onclick=()=>pick(x.k,x.a[+b.dataset.i]))
-    sendHeightSoon()
-  }
-
-  const res=key=>{
-    prog()
-    fill.style.width="100%"
-    const r=K[key],others=KEYS.filter(k=>k!==key).map(k=>`<a class="miniBtn" href="${K[k].url}" target="_top">${esc(k)}</a>`).join("")
-    app.innerHTML=`<div class="resultTop"><div><div class="resultTitle">${esc(r.title)}</div></div><a class="restartTop" href="#" id="rt">↺</a></div><div class="grid"><div class="img"><img src="${r.img}" alt=""></div><div class="rightCol"><a class="primaryCta" href="${r.url}" target="_top">View product</a><div class="meta">${(r.note)}</div><div class="otherWrap"><div class="otherLabel">Other options</div><div class="otherBtns">${others}</div></div></div></div>`
-    document.getElementById("rt").onclick=e=>{e.preventDefault();i=0;ans={};q();sendHeightSoon()}
-    app.querySelectorAll("img").forEach(img=>img.addEventListener("load",sendHeightSoon,{once:true}))
-    sendHeightSoon()
-  }
-
-  try{
-    new ResizeObserver(sendHeightSoon).observe(document.documentElement)
-  }catch(e){}
-
-  window.addEventListener("load",sendHeightSoon)
-  window.addEventListener("resize",sendHeightSoon)
-  window.addEventListener("orientationchange",sendHeightSoon)
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sendHeightSoon)
-
-  q()
-  </script>
-</body>
-</html>
+q()
+</script></body></html>
